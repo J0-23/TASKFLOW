@@ -3,35 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-body {
-  background-color: #f9f9f9;
-  height: 100vh;
-  position: relative;
-}
-
-.auth-page {
-  height: 100vh;
-  background: url("../public/glass-bg.png") no-repeat center center fixed;
-}
-
-form {
-  box-shadow: 2px 3px 15px rgba(0, 0, 0, 0.08);
-}
-
-/* Utilities */
-.u-triangle::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -7px;
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-right: 8px solid #3aafae;
-  transform: translateY(-50%);
-}
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -139,11 +110,35 @@ form {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+body {
+  background-color: #f9f9f9;
+  height: 100vh;
+  position: relative;
+}
+
+.auth-page {
+  height: 100vh;
+  background: url("../public/glass-bg.png") no-repeat center center fixed;
+}
+
+form {
+  box-shadow: 2px 3px 15px rgba(0, 0, 0, 0.08);
+}
+
+.main-layout::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Utilities */
+.u-triangle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -7px;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 8px solid #3aafae;
+  transform: translateY(-50%);
 }
