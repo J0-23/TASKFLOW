@@ -1,3 +1,8 @@
+"use client";
+import useRedirect from "@/hooks/useUserRedirect";
+
 export default function Home() {
-  return <div></div>;
+  useRedirect("/login");
+
+  return <main></main>;
 }
