@@ -13,7 +13,7 @@ export const TasksProvider = ({ children }) => {
   const [loading, setLoading] = React.useState(false);
   const [task, setTask] = React.useState({});
 
-  const [priority, setPriority] = React.useState("All");
+  const [priority, setPriority] = React.useState("all");
 
   // get tasks
   const getTasks = async () => {
@@ -68,9 +68,10 @@ export const TasksProvider = ({ children }) => {
     } catch (error) {
       console.log("Error updating task", error);
     }
+    setLoading(false);
   };
 
-  // dete task
+  // delete task
   const deleteTask = async (taskId) => {
     setLoading(true);
     try {
@@ -83,6 +84,7 @@ export const TasksProvider = ({ children }) => {
     } catch (error) {
       console.log("Error deleting task", error);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -95,6 +97,7 @@ export const TasksProvider = ({ children }) => {
         tasks,
         loading,
         task,
+        tasks,
         getTask,
         createTask,
         updateTask,
