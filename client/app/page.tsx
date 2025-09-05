@@ -17,9 +17,10 @@ export default function Home() {
         <h1 className="text-2xl font-bold">All Tasks</h1>
         <Filters />
       </div>
-      <div className="pb-[2rem] mt-6 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))} gap-[1-5rem]">
+
+      <div className="pb-[2rem] mt-6 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-[1.5rem]">
         {tasks.map((task: Task, i: number) => (
-          <TaskItem key={i} />
+          <TaskItem key={i} task={task} />
         ))}
       </div>
     </main>
