@@ -44,3 +44,12 @@ export const filteredTasks = (tasks: Task[], priority: string) => {
 
   return filteredTasks();
 };
+
+export const overdueTasks = (task: Task[]) => {
+  const todayDate = moment();
+
+  // filter overdue tasks
+  return task.filter((task) => {
+    return !task.completed && moment(task.dueDate).isBefore(todayDate);
+  });
+};
