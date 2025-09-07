@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { createContext, useEffect } from "react";
 import { useUserContext } from "./userContext";
+import toast from "react-hot-toast";
 
 const TasksContext = createContext();
 
@@ -13,7 +14,35 @@ export const TasksProvider = ({ children }) => {
   const [loading, setLoading] = React.useState(false);
   const [task, setTask] = React.useState({});
 
+  const [isEditing, setIsEditing] = React.useState(false);
   const [priority, setPriority] = React.useState("all");
+  const [activeTask, setActiveTask] = React.useState(null);
+  const [modalMode, setModalMode] = React.useState("");
+  const [profileModal, setProfileModal] = React.useState(false);
+
+  const openModalForAdd = () => {
+    setModalMode("add");
+    setIsEditing(true);
+    setTask({});
+  };
+
+  const openModalForEdit = (task) => {
+    setModalMode("edit");
+    setIsEditing(true);
+    setActiveTask(task);
+  };
+
+  const openProfileModal = () => {
+    setProfileModal(true);
+  };
+
+  const closeModal = () => {
+    setIsEditing(false);
+    setProfileModal(false);
+    setModalMode("");
+    setActiveTask(null);
+    setTask({});
+  };
 
   // get tasks
   const getTasks = async () => {
@@ -48,6 +77,7 @@ export const TasksProvider = ({ children }) => {
       const res = await axios.post(`${serverUrl}/task/create`, task);
 
       setTasks([...tasks, res.data]);
+      toast.success("Task created successfully");
     } catch (error) {
       console.log("Error creating task", error);
     }
@@ -63,6 +93,8 @@ export const TasksProvider = ({ children }) => {
       const newTasks = tasks.map((tsk) => {
         return tsk._id === res.data._id ? res.data : tsk;
       });
+
+      toast.success("Task updated successfully");
 
       setTasks(newTasks);
     } catch (error) {
@@ -87,6 +119,21 @@ export const TasksProvider = ({ children }) => {
     setLoading(false);
   };
 
+  const handleInput = (name) => (e) => {
+    if (name === "setTask") {
+      setTask(e);
+    } else {
+      setTask({ ...task, [name]: e.target.value });
+    }
+  };
+
+  // get completed tasks
+  const completedTasks = tasks.filter((task) => task.completed);
+
+  // get pending tasks
+  // get completed tasks
+  const activeTasks = tasks.filter((task) => !task.completed);
+
   useEffect(() => {
     getTasks();
   }, [userId]);
@@ -104,6 +151,17 @@ export const TasksProvider = ({ children }) => {
         deleteTask,
         priority,
         setPriority,
+        handleInput,
+        isEditing,
+        setIsEditing,
+        openModalForAdd,
+        openModalForEdit,
+        activeTask,
+        closeModal,
+        modalMode,
+        openProfileModal,
+        activeTasks,
+        completedTasks,
       }}
     >
       {children}
