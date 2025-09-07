@@ -59,9 +59,9 @@ function Modal() {
             className="bg-[#F9F9F9] p-2 rounded-md border"
             type="text"
             id="title"
-            name="title"
             placeholder="Task Title"
-            value={task.title}
+            name="title"
+            value={task.title || ""}
             onChange={(e) => handleInput("title")(e)}
           />
         </div>
@@ -73,7 +73,7 @@ function Modal() {
             rows={4}
             name="description"
             placeholder="Task Description"
-            value={task.description}
+            value={task.description || ""}
             onChange={(e) => handleInput("description")(e)}
           />
         </div>
@@ -83,7 +83,7 @@ function Modal() {
           <select
             className="bg-[#F9F9F9] p-2 rounded-md border cursor-pointer"
             name="priority"
-            value={task.priority}
+            value={task.priority || "low"}
             onChange={(e) => handleInput("priority")(e)}
           >
             <option value="low">Low</option>
@@ -97,8 +97,8 @@ function Modal() {
           <input
             className="bg-[#F9F9F9] p-2 rounded-md border"
             type="date"
-            name="dueDate"
-            value={task.dueDate}
+            name="dueDate "
+            value={task.dueDate || ""}
             onChange={(e) => handleInput("dueDate")(e)}
           />
         </div>
