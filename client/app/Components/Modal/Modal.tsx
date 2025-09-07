@@ -98,7 +98,7 @@ function Modal() {
             className="bg-[#F9F9F9] p-2 rounded-md border"
             type="date"
             name="dueDate "
-            value={task.dueDate || ""}
+            value={task.dueDate}
             onChange={(e) => handleInput("dueDate")(e)}
           />
         </div>
