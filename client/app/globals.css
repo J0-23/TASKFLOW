@@ -121,12 +121,16 @@ body {
   background: url("../public/glass-bg.png") no-repeat center center fixed;
 }
 
-form {
+.auth-page form {
   box-shadow: 2px 3px 15px rgba(0, 0, 0, 0.08);
 }
 
 .main-layout::-webkit-scrollbar {
   width: 0;
+}
+
+button {
+  cursor: pointer;
 }
 
 /* Utilities */
