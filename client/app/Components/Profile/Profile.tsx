@@ -6,7 +6,8 @@ import { useTasks } from "@/context/taskContext";
 
 function Profile() {
   const { user } = useUserContext();
-  const { tasks, activeTasks, completedTasks, openProfileModal } = useTasks();
+  const { tasks, activeTasks, completedTasks, overdueTasks, openProfileModal } =
+    useTasks();
 
   return (
     <div className="m-6">
@@ -53,11 +54,11 @@ function Profile() {
             </p>
           </div>
           <div className="text-gray-400">
-            <p>Open Tasks:</p>
+            <p>Overdue:</p>
             <p className="pl-4 relative flex gap-2">
               <span className="absolute h-[70%] w-[0.2rem] left-[1px] top-1/2 translate-y-[-50%] bg-orange-400 rounded-[5px]"></span>
               <span className="font-medium text-4xl text-[#333]">
-                {activeTasks.length}
+                {overdueTasks.length}
               </span>
             </p>
           </div>

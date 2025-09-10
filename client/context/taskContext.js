@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { createContext, useEffect } from "react";
 import { useUserContext } from "./userContext";
 import toast from "react-hot-toast";
+import { overdueTasks as getOverdueTasks } from "@/utils/utilities";
 
 const TasksContext = createContext();
 
@@ -133,6 +134,9 @@ export const TasksProvider = ({ children }) => {
   // get pending tasks
   const activeTasks = tasks.filter((task) => !task.completed);
 
+  // get overdue tasks
+  const overdueTasks = getOverdueTasks(tasks);
+
   useEffect(() => {
     getTasks();
   }, [userId]);
@@ -161,6 +165,7 @@ export const TasksProvider = ({ children }) => {
         openProfileModal,
         activeTasks,
         completedTasks,
+        overdueTasks,
         profileModal,
       }}
     >

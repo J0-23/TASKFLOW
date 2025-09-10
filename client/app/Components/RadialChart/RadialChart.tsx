@@ -1,12 +1,9 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
 import { Label, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts";
-
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -24,7 +21,7 @@ export const description = "A radial chart with stacked sections";
 const chartConfig = {
   desktop: {
     label: "Completed",
-    color: "#8BCE89",
+    color: "#355b88",
   },
   mobile: {
     label: "Pending",
@@ -32,7 +29,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function RadialChart() {
+function RadialChart({ className }: { className?: string }) {
   const { tasks, completedTasks, activeTasks } = useTasks();
   const tasksTotal = tasks.length;
 
@@ -44,11 +41,18 @@ function RadialChart() {
   ];
 
   return (
-    <Card className="flex flex-col text-center justify-center border-2 border-white shadow-none bg-[#EDEDED]">
+    <Card
+      className={
+        "flex flex-col text-center justify-center shadow-none bg-white" +
+        (className ? ` ${className}` : "")
+      }
+    >
       <CardHeader className="items-center pb-0">
-        <CardTitle>Completed vs Pending</CardTitle>
-        <CardDescription>Task completion status.</CardDescription>
+        <CardTitle className="text-lg font-semibold text-gray-800">
+          Completed vs Pending
+        </CardTitle>
       </CardHeader>
+
       <CardContent className="flex flex-1 items-center pb-0">
         <ChartContainer
           config={chartConfig}
@@ -73,14 +77,14 @@ function RadialChart() {
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) - 16}
-                          className="fill-foreground text-2xl font-bold"
+                          className="fill-gray-900 text-2xl font-bold"
                         >
                           {tasksTotal}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 4}
-                          className="fill-muted-foreground"
+                          className="fill-gray-500 text-sm"
                         >
                           Tasks
                         </tspan>
@@ -90,29 +94,32 @@ function RadialChart() {
                 }}
               />
             </PolarRadiusAxis>
+
             <RadialBar
               dataKey="completed"
               stackId="a"
               cornerRadius={5}
-              fill="var(--color-desktop)"
+              fill="#355b88"
               className="stroke-transparent stroke-2"
             />
+
             <RadialBar
               dataKey="pending"
-              fill="var(--color-mobile)"
               stackId="a"
               cornerRadius={5}
+              fill="#EB4E31"
               className="stroke-transparent stroke-2"
             />
           </RadialBarChart>
         </ChartContainer>
       </CardContent>
+
       <CardFooter className="flex-col gap-2 text-sm -mt-20">
-        <div className="flex items-center gap-2 leading-none font-medium">
-          Task completion improved by 12% this month{" "}
+        <div className="flex items-center gap-2 leading-none font-medium text-gray-700">
+          Team workload summary
         </div>
-        <div className="text-muted-foreground leading-none">
-          Analysis based on tasks completed in the last 30 days.
+        <div className="text-gray-500 leading-none">
+          A quick snapshot of current task distribution.
         </div>
       </CardFooter>
     </Card>
