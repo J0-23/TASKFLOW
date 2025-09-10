@@ -1,6 +1,4 @@
 "use client";
-
-import TaskItem from "@/app/Components/TaskItem/TaskItem";
 import { useTasks } from "@/context/taskContext";
 import useDetectOutside from "@/hooks/useDetectOutside";
 import React, { useEffect } from "react";
@@ -16,14 +14,14 @@ function Modal() {
     activeTask,
     updateTask,
   } = useTasks();
-  const ref = React.useRef<HTMLFormElement>(null);
+  const ref = React.useRef(null);
 
-  // hook to detect clicks outside the modal
+  // Use the hook to detect clicks outside the modal
   useDetectOutside({
     ref,
     callback: () => {
       if (isEditing) {
-        closeModal();
+        closeModal(); // Close modal if it is in add/edit mode
       }
     },
   });
@@ -65,25 +63,23 @@ function Modal() {
             onChange={(e) => handleInput("title")(e)}
           />
         </div>
-
         <div className="flex flex-col gap-1">
           <label htmlFor="description">Description</label>
           <textarea
             className="bg-[#F9F9F9] p-2 rounded-md border resize-none"
-            rows={4}
             name="description"
             placeholder="Task Description"
-            value={task.description || ""}
+            rows={4}
+            value={task.description}
             onChange={(e) => handleInput("description")(e)}
           />
         </div>
-
         <div className="flex flex-col gap-1">
           <label htmlFor="priority">Select Priority</label>
           <select
             className="bg-[#F9F9F9] p-2 rounded-md border cursor-pointer"
             name="priority"
-            value={task.priority || "low"}
+            value={task.priority}
             onChange={(e) => handleInput("priority")(e)}
           >
             <option value="low">Low</option>
@@ -91,23 +87,20 @@ function Modal() {
             <option value="high">High</option>
           </select>
         </div>
-
         <div className="flex flex-col gap-1">
           <label htmlFor="dueDate">Due Date</label>
           <input
             className="bg-[#F9F9F9] p-2 rounded-md border"
             type="date"
             name="dueDate"
-            value={task.dueDate || ""}
+            value={task.dueDate}
             onChange={(e) => handleInput("dueDate")(e)}
           />
         </div>
-
         <div className="flex flex-col gap-1">
           <label htmlFor="completed">Task Completed</label>
           <div className="flex items-center justify-between bg-[#F9F9F9] p-2 rounded-md border">
             <label htmlFor="completed">Completed</label>
-
             <div>
               <select
                 className="bg-[#F9F9F9] p-2 rounded-md border cursor-pointer"
@@ -122,7 +115,7 @@ function Modal() {
           </div>
         </div>
 
-        <div className="mt-8 ">
+        <div className="mt-8">
           <button
             type="submit"
             className={`text-white py-2 rounded-md w-full hover:bg-blue-500 transition duration-200 ease-in-out ${

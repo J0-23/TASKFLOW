@@ -58,7 +58,7 @@ const Header = () => {
             }
           }}
         >
-          {userId ? "Add Task" : "Login / Register"}
+          {userId ? "Add New" : "Login / Register"}
         </button>
 
         <div className="flex items-center gap-3">
