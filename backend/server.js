@@ -13,9 +13,10 @@ const port = process.env.PORT || 8000;
 const app = express();
 
 //middleware
+const clientUrl = process.env.CLIENT_URL?.replace(/\/$/, "");
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: process.env.clientUrl,
     credentials: true,
   })
 );
