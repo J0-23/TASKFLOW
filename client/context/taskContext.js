@@ -6,7 +6,7 @@ import { overdueTasks as getOverdueTasks } from "@/utils/utilities";
 
 const TasksContext = createContext();
 
-const serverUrl = "https://taskflow-5mxs.onrender.com//api/v1";
+const serverUrl = "https://taskflow-5mxs.onrender.com";
 
 export const TasksProvider = ({ children }) => {
   const userId = useUserContext().user._id;
