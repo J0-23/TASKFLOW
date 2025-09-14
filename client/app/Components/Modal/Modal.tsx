@@ -14,14 +14,15 @@ function Modal() {
     activeTask,
     updateTask,
   } = useTasks();
-  const ref = React.useRef(null);
 
   // Use the hook to detect clicks outside the modal
+  const ref = React.useRef<HTMLFormElement>(null);
+
   useDetectOutside({
     ref,
     callback: () => {
       if (isEditing) {
-        closeModal(); // Close modal if it is in add/edit mode
+        closeModal();
       }
     },
   });
