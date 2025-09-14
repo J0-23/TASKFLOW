@@ -13,12 +13,16 @@ const port = process.env.PORT || 8000;
 const app = express();
 
 //middleware
+const clientUrl = process.env.CLIENT_URL?.replace(/\/$/, "");
+console.log("CORS origin set to:", clientUrl);
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: clientUrl,
     credentials: true,
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

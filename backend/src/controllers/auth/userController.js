@@ -44,7 +44,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
     sameSite: "none",
-    secure: false,
+    secure: true,
   });
 
   if (user) {
@@ -104,7 +104,7 @@ export const loginUser = asyncHandler(async (req, res) => {
       httpOnly: true,
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
       sameSite: "none",
-      secure: false,
+      secure: true,
     });
 
     // send back the user and token
