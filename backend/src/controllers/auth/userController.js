@@ -185,18 +185,21 @@ export const userLoginStatus = asyncHandler(async (req, res) => {
   const token = req.cookies.token;
 
   if (!token) {
-    // 401 unauthorized
-    res.status(401).json({ message: "Not authorized, please login" });
+    return res.status(401).json({ message: "Not authorized, please login" });
   }
-  // verify the token
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  if (decoded) {
-    res.status(200).json(true);
-  } else {
-    res.status(401).json(false);
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    if (decoded) {
+      res.status(200).json(true);
+    } else {
+      res.status(401).json(false);
+    }
+  } catch (error) {
+    res.status(401).json({ message: "Token is invalid or expired" });
   }
 });
-
 // email verification
 export const verifyEmail = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
