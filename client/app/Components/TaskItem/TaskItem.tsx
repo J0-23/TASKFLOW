@@ -84,7 +84,7 @@ function TaskItem({ task }: TaskItemProps) {
 
             {/* Edit */}
             <button
-              className="text-blue-600 hover:text-blue-800 transition"
+              className="text-sky-800 hover:text-blue-500 transition"
               onClick={() => {
                 getTask(task._id);
                 openModalForEdit(task);
@@ -95,7 +95,7 @@ function TaskItem({ task }: TaskItemProps) {
 
             {/* Delete */}
             <button
-              className="text-red-600 hover:text-red-800 transition"
+              className="text-gray-500 hover:text-red-600 transition"
               onClick={() => deleteTask(task._id)}
             >
               {trash}

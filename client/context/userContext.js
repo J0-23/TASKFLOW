@@ -16,7 +16,7 @@ axios.defaults.withCredentials = true;
 
 export const UserContextProvider = ({ children }) => {
   // const serverUrl = "https://sentri-auth-backend.onrender.com";
-  const serverUrl = "http://localhost:8000";
+  const serverUrl = "https://taskflow-5mxs.onrender.com";
 
   const router = useRouter();
 
