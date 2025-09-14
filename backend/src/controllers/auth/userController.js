@@ -130,7 +130,7 @@ export const logoutUser = asyncHandler(async (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
     sameSite: "none",
-    secure: false,
+    secure: true,
     path: "/",
   });
 
