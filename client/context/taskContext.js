@@ -49,7 +49,9 @@ export const TasksProvider = ({ children }) => {
   const getTasks = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${serverUrl}/tasks`);
+      const res = await axios.get(`${serverUrl}/tasks`, {
+        withCredentials: true, // send cookies to server
+      });
 
       setTasks(res.data.tasks);
     } catch (error) {
@@ -62,7 +64,9 @@ export const TasksProvider = ({ children }) => {
   const getTask = async (taskId) => {
     setLoading(true);
     try {
-      const res = await axios.get(`${serverUrl}/task/${taskId}`);
+      const res = await axios.get(`${serverUrl}/task/${taskId}`, {
+        withCredentials: true, // send cookies to server
+      });
 
       setTask(res.data);
     } catch (error) {
@@ -75,7 +79,9 @@ export const TasksProvider = ({ children }) => {
   const createTask = async (task) => {
     setLoading(true);
     try {
-      const res = await axios.post(`${serverUrl}/task/create`, task);
+      const res = await axios.post(`${serverUrl}/task/create`, task, {
+        withCredentials: true, // send cookies to server
+      });
 
       setTasks([...tasks, res.data]);
       toast.success("Task created successfully");
@@ -89,11 +95,14 @@ export const TasksProvider = ({ children }) => {
   const updateTask = async (task) => {
     setLoading(true);
     try {
-      const res = await axios.patch(`${serverUrl}/task/${task._id}`, task);
-      // update task in array
-      const newTasks = tasks.map((tsk) => {
-        return tsk._id === res.data._id ? res.data : tsk;
+      const res = await axios.patch(`${serverUrl}/task/${task._id}`, task, {
+        withCredentials: true, // send cookies to server
       });
+
+      // update task in array
+      const newTasks = tasks.map((tsk) =>
+        tsk._id === res.data._id ? res.data : tsk
+      );
 
       toast.success("Task updated successfully");
 
@@ -108,7 +117,9 @@ export const TasksProvider = ({ children }) => {
   const deleteTask = async (taskId) => {
     setLoading(true);
     try {
-      await axios.delete(`${serverUrl}/task/${taskId}`);
+      await axios.delete(`${serverUrl}/task/${taskId}`, {
+        withCredentials: true, // send cookies to server
+      });
 
       // remove task from array
       const newTasks = tasks.filter((tsk) => tsk._id !== taskId);
@@ -120,6 +131,7 @@ export const TasksProvider = ({ children }) => {
     setLoading(false);
   };
 
+  // handle input
   const handleInput = (name) => (e) => {
     if (name === "setTask") {
       setTask(e);
