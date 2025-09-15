@@ -9,6 +9,7 @@ import Header from "./Components/Header/Header";
 import MainContentLayout from "@/providers/MainContentLayout";
 import SidebarProvider from "@/providers/SidebarProvider";
 import MainLayout from "@/providers/MainLayout";
+import GTMinitialiser from "@/providers/GTMinitialiser";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,6 +28,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <GTMinitialiser />
+
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
