@@ -147,3 +147,30 @@ button {
   border-right: 8px solid #3aafae;
   transform: translateY(-50%);
 }
+
+/* Blocker for mobile screens */
+@media (max-width: 1024px) {
+  body::before {
+    content: "Mobile version not available, please use your desktop.";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #f9f9f9;
+    color: #111;
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    z-index: 9999;
+  }
+
+  /* hide everything else under the overlay */
+  body > * {
+    display: none !important;
+  }
+}
